@@ -3,7 +3,7 @@ export default function appendToEachArrayValue(array, appendString) {
 
   for (const idx in array) {
     if (idx < appendString.length) {
-      arrayCopy.push(`${appendString[idx]}`);
+      arrayCopy.push(appendString + array[idx]);
     }
   }
 
