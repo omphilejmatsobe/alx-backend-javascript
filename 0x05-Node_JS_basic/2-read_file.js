@@ -1,8 +1,7 @@
 const fs = require('fs');
 
-const countStudents = (path) =>{
+const countStudents = (path) => {
   try {
-
     const info = fs.readFileSync(path, { encoding: 'utf8' }).split(/\r?\n/);
     const fileLines = info;
 
@@ -42,6 +41,6 @@ const countStudents = (path) =>{
   } catch (error) {
     throw new Error('Cannot load the database');
   }
-}
+};
 
 module.exports = countStudents;

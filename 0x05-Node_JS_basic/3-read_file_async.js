@@ -1,7 +1,6 @@
 const fs = require('fs');
 
 const countStudents = (path) => {
-
   const promise = new Promise((resolve, reject) => {
     fs.readFile(path,
       'utf-8',
@@ -19,24 +18,24 @@ const countStudents = (path) => {
             for (const line of lines) {
               if (line.trim() !== '' && x > 0) {
                 studentCount += 1;
-			
+
             const [fname, lname, age, field] = line.split(','); // eslint-disable-line
-            if (!fields[field]) {
-              fields[field] = {
-                count: 1,
-                students: [fname],
-              };
-            } else {
-                const newCount = fields[field].count + 1;
-                const newStudents = (fields[field].students).concat(fname);
-                fields[field] = {
+                if (!fields[field]) {
+                  fields[field] = {
+                    count: 1,
+                    students: [fname],
+                  };
+                } else {
+                  const newCount = fields[field].count + 1;
+                  const newStudents = (fields[field].students).concat(fname);
+                  fields[field] = {
                     count: newCount,
                     students: newStudents,
-                    };
+                  };
                 }
-            }
-            
-            x += 1;
+              }
+
+              x += 1;
             }
           };
 
@@ -60,6 +59,6 @@ const countStudents = (path) => {
   });
 
   return promise;
-}
+};
 
 module.exports = countStudents;
