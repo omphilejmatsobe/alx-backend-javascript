@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-function countStudents(path) {
+const countStudents = (path) => {
 
   const promise = new Promise((resolve, reject) => {
     fs.readFile(path,
