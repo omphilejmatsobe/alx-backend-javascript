@@ -1,14 +1,13 @@
-import { Group } from 'three';
 import readDatabase from '../utils';
 
-const VALID_MAJORS = ['CS', 'SWE'];
+const majors = ['CS', 'SWE'];
 
 class StudentsController {
   static getAllStudents(request, response) {
     const path = process.argv.length > 2 ? process.argv[2] : '';
 
     readDatabase(path)
-      .then((Group) => {
+      .then((studentGroups) => {
         const resp = ['This is the list of our students'];
 
         const cmpFxn = (a, b) => {
@@ -21,7 +20,7 @@ class StudentsController {
           return 0;
         };
 
-        for (const [field, group] of Object.entries(Group).sort(cmpFxn)) {
+        for (const [field, group] of Object.entries(studentGroups).sort(cmpFxn)) {
           resp.push([
             `Number of students in ${field}: ${group.length}.`,
             'List:',
@@ -41,16 +40,16 @@ class StudentsController {
     const path = process.argv.length > 2 ? process.argv[2] : '';
     const { major } = request.params;
 
-    if (!VALID_MAJORS.includes(major)) {
+    if (!majors.includes(major)) {
       response.status(500).send('Major parameter must be CS or SWE');
       return;
     }
     readDatabase(path)
-      .then((Group) => {
+      .then((studentGroups) => {
         let text = '';
 
-        if (Object.keys(Group).includes(major)) {
-          const group = Group[major];
+        if (Object.keys(studentGroups).includes(major)) {
+          const group = studentGroups[major];
           text = `List: ${group.map((student) => student.firstname).join(', ')}`;
         }
         response.status(200).send(text);

@@ -1,7 +1,6 @@
 import fs from 'fs';
 
 const readDatabase = (dataPath) => new Promise((resolve, reject) => {
-
   if (!dataPath) {
     reject(new Error('Cannot load the database'));
   }
@@ -16,7 +15,7 @@ const readDatabase = (dataPath) => new Promise((resolve, reject) => {
           .toString('utf-8')
           .trim()
           .split('\n');
-        const group = {};
+        const Group = {};
         const Fields = Lines[0].split(',');
         const studentPropNames = Fields
           .slice(0, Fields.length - 1);
